@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>AXENVO — Trading Terminal</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@400;500&display=swap');
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:#f4f2ec;color:#141512;font-family:"DM Sans",Arial,sans-serif}button,a{font:inherit}
+.top{height:30px;background:#050605;color:#fff;display:flex;align-items:center;overflow:hidden;white-space:nowrap;font-size:9px;letter-spacing:1.8px}.ticker{min-width:max-content;animation:marquee 35s linear infinite}.ticker span{margin-right:70px}.up{color:#9fc47b}.down{color:#d28e82}@keyframes marquee{to{transform:translateX(-50%)}}
+.header{height:82px;background:#fff;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:0 44px;border-bottom:1px solid #e7e5dd;position:sticky;top:0;z-index:50}.nav{display:flex;gap:25px;align-items:center}.nav a{font-size:12px;color:#111;text-decoration:none}.brand{display:flex;align-items:center;gap:10px;color:#111;text-decoration:none}.brand img{width:52px;height:52px;object-fit:contain;background:#fff}.brand b{font-size:25px;font-weight:500;letter-spacing:6px}.actions{justify-self:end;display:flex;align-items:center;gap:12px}.actions button{border:0;background:none;cursor:pointer;font-size:18px}.live{font-size:9px!important;letter-spacing:1px;border:1px solid #ddd!important;padding:9px 11px!important}.live:before{content:"";display:inline-block;width:6px;height:6px;border-radius:50%;background:#8baa68;margin-right:7px;animation:blink 1.4s infinite}@keyframes blink{50%{opacity:.2}}
+.categories{height:112px;background:#fff;display:flex;justify-content:center;align-items:center;gap:38px;border-bottom:1px solid #e7e5dd}.cat{text-align:center;cursor:pointer}.circle{width:70px;height:70px;border-radius:50%;display:grid;place-items:center;margin-bottom:8px;color:#fff;font-size:21px;position:relative;overflow:hidden}.circle:after{content:"";position:absolute;inset:10px;border:1px solid rgba(255,255,255,.55);border-radius:50%}.c1{background:linear-gradient(145deg,#b4c89c,#344137)}.c2{background:linear-gradient(145deg,#ded4c0,#716756)}.c3{background:linear-gradient(145deg,#aeb9b5,#29302c)}.c4{background:linear-gradient(145deg,#d4bc8f,#57432b)}.c5{background:linear-gradient(145deg,#d6d4cc,#77766e)}.cat span{font-size:11px}
+.hero{height:730px;position:relative;overflow:hidden;background:#111;display:flex;align-items:flex-end}.hero-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(.55) saturate(.82)}.hero-video-overlay{position:absolute;inset:0;background:linear-gradient(90deg,rgba(8,12,9,.84),rgba(8,12,9,.22) 65%,rgba(8,12,9,.08)),linear-gradient(0deg,rgba(8,12,9,.38),transparent 55%)}.hero-copy{position:relative;z-index:4;padding:0 7% 60px;color:#fff;max-width:820px}.eyebrow{font-size:10px;letter-spacing:3px;color:#e6e0d2;margin-bottom:22px}.hero h1{font-family:"Playfair Display",serif;font-size:clamp(70px,9vw,135px);font-weight:400;line-height:.82;letter-spacing:-6px;margin:0}.hero h1 em{color:#dbc79f;font-style:normal}.hero p{font-size:14px;line-height:1.7;max-width:470px;color:#e8e7e0;margin:27px 0}.btn{background:#fff;border:0;color:#111;padding:15px 23px;font-size:10px;letter-spacing:1.6px;cursor:pointer}.btn.dark{background:#111;color:#fff}.video-badge{position:absolute;right:38px;bottom:38px;z-index:5;border:1px solid rgba(255,255,255,.5);background:rgba(0,0,0,.25);backdrop-filter:blur(8px);color:#fff;padding:12px 15px;font-size:9px;letter-spacing:1.4px}
+.market-strip{background:#0b0d0b;color:#fff;padding:19px 7%;display:grid;grid-template-columns:repeat(6,1fr);gap:0}.market{padding:0 17px;border-right:1px solid #292d29}.market:first-child{padding-left:0}.market:last-child{border:0}.market small{display:block;color:#777;font-size:8px;letter-spacing:1.5px;margin-bottom:7px}.market strong{font-size:13px}.market span{font-size:9px;margin-left:5px}
+.section{padding:105px 7%;background:#f4f2ec}.head{display:flex;justify-content:space-between;align-items:end;gap:30px;margin-bottom:48px}.label{font-size:10px;letter-spacing:3px;color:#8b7654}.head h2{font-family:"Playfair Display",serif;font-weight:400;font-size:62px;line-height:.88;letter-spacing:-3px;margin:10px 0}.muted{color:#777;max-width:440px;line-height:1.75;font-size:12px}
+.dashboard{display:grid;grid-template-columns:1.55fr .75fr;gap:18px}.card{background:#fff;border:1px solid #e3e0d7;padding:24px}.card-title{display:flex;justify-content:space-between;align-items:start}.card-title h3{font-size:13px;font-weight:500;margin:0}.card-title small{font-size:9px;color:#888}.big{font-size:31px;margin-top:11px}.big span{font-size:11px}.big-chart{height:340px;margin-top:17px;position:relative;overflow:hidden;background:linear-gradient(#fff,#faf9f5);border:1px solid #efede6}.gridlines{position:absolute;inset:0;background:repeating-linear-gradient(to bottom,transparent 0,transparent 67px,#ece9e1 68px)}.big-chart svg{position:absolute;inset:10px;width:100%;height:100%}.marker{position:absolute;left:68%;top:22%;width:10px;height:10px;border-radius:50%;background:#769d5a;box-shadow:0 0 0 7px rgba(118,157,90,.12)}.marker span{position:absolute;left:15px;top:-4px;font-size:8px;color:#78915f;white-space:nowrap}.stats{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:18px}.stat{background:#f3f1eb;padding:15px}.stat small{display:block;color:#888;font-size:8px;letter-spacing:1px}.stat strong{display:block;font-size:17px;margin-top:7px}.riskbar{margin-top:18px;height:8px;background:#e6e3da;position:relative}.riskbar i{position:absolute;left:0;top:0;bottom:0;width:63%;background:#8ba76b}
+.tools{display:grid;grid-template-columns:repeat(4,1fr);gap:15px;margin-top:18px}.tool{background:#fff;border:1px solid #e3e0d7;padding:21px;min-height:145px}.tool .icon{font-size:24px;margin-bottom:24px}.tool h4{font-size:12px;margin:0 0 7px}.tool p{font-size:10px;color:#888;line-height:1.6;margin:0}
+.strategy{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}.strategy-card{background:#fff;border:1px solid #e3e0d7;min-height:300px;padding:28px;position:relative;overflow:hidden}.strategy-card:after{content:"";position:absolute;width:190px;height:190px;border-radius:50%;right:-75px;top:-75px;background:#e1ddd1}.strategy-card:nth-child(2):after{background:#d5ded0}.strategy-card:nth-child(3):after{background:#ddd2c0}.strategy-card strong{font-size:9px;letter-spacing:2px;color:#94764c}.strategy-card h3{font-family:"Playfair Display",serif;font-weight:400;font-size:31px;margin:48px 0 12px}.strategy-card p{font-size:11px;color:#777;line-height:1.75;max-width:260px}
+.course-section{padding:105px 7%;background:#fff}.course-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}.course-card{border:1px solid #e2dfd6;background:#f7f5ef;overflow:hidden}.course-art{height:180px;background:linear-gradient(135deg,#26352c,#8da176);position:relative;color:#fff;padding:22px;overflow:hidden}.course-art.gold{background:linear-gradient(135deg,#6e5b3b,#c8ad78)}.course-art.dark{background:linear-gradient(135deg,#0a0d0b,#3f5143)}.course-art strong{font-size:9px;letter-spacing:2px}.course-art b{display:block;font-family:"Playfair Display",serif;font-weight:400;font-size:29px;line-height:1;margin-top:35px;max-width:190px}.course-info{padding:23px}.course-info h3{font-family:"Playfair Display",serif;font-size:25px;font-weight:400;margin:0 0 9px}.course-info p{font-size:10px;line-height:1.7;color:#777;margin:0 0 17px}.course-meta{display:flex;justify-content:space-between;font-size:9px;color:#888;border-top:1px solid #e1ded6;padding-top:14px}.course-price{color:#151613;font-weight:700}.buy{margin-top:18px;width:100%;padding:13px;background:#101210;color:#fff;border:0;cursor:pointer;font-size:9px;letter-spacing:1.5px}
+.video-section{padding:100px 7%;background:#dedbd1}.video-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:18px}.video{min-height:410px;background:#101410;position:relative;display:flex;align-items:center;justify-content:center;overflow:hidden}.video:before{content:"";position:absolute;width:170%;height:45%;background:linear-gradient(90deg,transparent,#8da774,transparent);transform:rotate(-15deg);animation:scan 4s linear infinite;opacity:.25}@keyframes scan{from{transform:translateX(-35%) rotate(-15deg)}to{transform:translateX(35%) rotate(-15deg)}}.video-ui{position:absolute;inset:22px;border:1px solid rgba(255,255,255,.15);padding:16px;color:#999;font-size:9px}.play{z-index:2;width:78px;height:78px;border:1px solid #eee;border-radius:50%;display:grid;place-items:center;color:#fff;font-size:23px}.video-caption{background:#fff;padding:34px}.video-caption h3{font-family:"Playfair Display",serif;font-size:34px;font-weight:400;margin:10px 0 14px}.video-caption p{font-size:11px;color:#777;line-height:1.8}
+.admin-entry{margin-top:55px;border:1px dashed #b8b4a9;padding:18px;display:flex;justify-content:space-between;align-items:center;gap:20px}.admin-entry span{font-size:10px;color:#777}.admin-btn{border:1px solid #161713;background:#fff;padding:10px 14px;font-size:9px;letter-spacing:1px;cursor:pointer}
+.risk{background:#0a0b0a;color:#fff;padding:82px 7%;text-align:center}.risk h2{font-family:"Playfair Display",serif;font-weight:400;font-size:50px;margin:0 0 15px}.risk p{max-width:690px;margin:auto;color:#aaa;font-size:11px;line-height:1.9}.risk small{display:block;color:#555;font-size:8px;letter-spacing:2px;margin-top:22px}
+
+.discord-link{display:inline-flex;align-items:center;gap:10px;padding:12px 16px;border:1px solid #3a3c39;color:#fff;text-decoration:none;font-size:10px;letter-spacing:1.5px;margin-top:22px;transition:.25s}
+.discord-link:hover{background:#fff;color:#111;border-color:#fff}
+.discord-dot{width:8px;height:8px;border-radius:50%;background:#8f83d8;box-shadow:0 0 10px rgba(143,131,216,.55)}
+
+
+.discord-wrap{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:22px}.discord-link{display:inline-flex;align-items:center;gap:10px;padding:13px 17px;border:1px solid #5c5f59;background:#141614;color:#fff!important;text-decoration:none!important;font-size:10px;letter-spacing:1.5px;transition:.25s}.discord-link:hover{background:#fff;color:#111!important;border-color:#fff}.discord-dot{width:8px;height:8px;border-radius:50%;background:#8f83d8;box-shadow:0 0 10px rgba(143,131,216,.55)}.discord-copy{padding:13px 15px;border:1px solid #3a3c39;background:transparent;color:#bbb;font-size:9px;letter-spacing:1.3px;cursor:pointer}.discord-copy:hover{color:#fff;border-color:#777}.copy-toast{font-size:9px;color:#9fc47b;opacity:0;transition:.25s}.copy-toast.show{opacity:1}
+
+footer{background:#070807;color:#fff;padding:70px 7% 28px}.footer-logo{display:flex;align-items:center;gap:12px;font-size:51px;letter-spacing:8px;font-weight:300}.footer-logo img{width:52px;height:52px;object-fit:contain;background:#fff}.footer-links{display:flex;gap:28px;border-top:1px solid #292b29;padding-top:20px;margin-top:50px}.footer-links a{color:#aaa;text-decoration:none;font-size:10px}
+.admin-panel{position:fixed;inset:0;background:rgba(7,9,7,.78);backdrop-filter:blur(10px);z-index:200;display:none;align-items:center;justify-content:center;padding:20px}.admin-panel.open{display:flex}.admin-box{width:min(920px,100%);max-height:90vh;overflow:auto;background:#f4f2ec;color:#141512;border:1px solid #d8d4c8;padding:30px}.admin-top{display:flex;justify-content:space-between;align-items:start;border-bottom:1px solid #d8d4c8;padding-bottom:18px}.admin-top h2{font-family:"Playfair Display",serif;font-size:39px;font-weight:400;margin:0}.close-admin{border:0;background:none;font-size:25px;cursor:pointer}.admin-login{max-width:420px;margin:45px auto}.admin-login label{display:block;font-size:9px;letter-spacing:1.5px;margin-bottom:8px;color:#777}.admin-login input{width:100%;padding:13px;border:1px solid #d7d3c8;background:#fff;outline:none;margin-bottom:14px}.admin-login button{width:100%;padding:13px;background:#101210;color:#fff;border:0;cursor:pointer;font-size:9px;letter-spacing:1.5px}.admin-error{color:#a24f45;font-size:10px;min-height:20px}.admin-dashboard{display:none}.admin-dashboard.show{display:block}.admin-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:22px 0}.admin-stat{background:#fff;padding:17px;border:1px solid #e0dcd2}.admin-stat small{display:block;font-size:8px;color:#888}.admin-stat strong{font-size:23px;display:block;margin-top:7px}.admin-layout{display:grid;grid-template-columns:1fr 1fr;gap:18px}.admin-card{background:#fff;border:1px solid #e0dcd2;padding:20px}.admin-card h3{font-size:12px;margin:0 0 16px}.course-row{display:flex;justify-content:space-between;gap:10px;padding:11px 0;border-bottom:1px solid #eee}.course-row span{font-size:10px}.danger{color:#a24f45}.tiny-btn{border:1px solid #ccc;background:#fff;padding:6px 8px;font-size:8px;cursor:pointer}.admin-form input,.admin-form textarea,.admin-form select{width:100%;padding:13px;border:1px solid #d7d3c8;background:#fff;outline:none;margin-bottom:14px}.admin-form button{width:100%;padding:13px;background:#101210;color:#fff;border:0;cursor:pointer;font-size:9px}
+.search{position:fixed;inset:0;background:rgba(255,255,255,.97);z-index:100;display:none;align-items:center;justify-content:center}.search.open{display:flex}.search input{width:70%;font-size:39px;border:0;border-bottom:1px solid #111;background:none;outline:0;padding:15px}.search button{border:0;background:none;font-size:30px;cursor:pointer}
+@media(max-width:950px){.header{grid-template-columns:1fr auto;padding:0 18px}.nav{display:none}.categories{justify-content:flex-start;overflow:auto;padding:0 18px}.hero{height:650px}.market-strip{grid-template-columns:repeat(3,1fr);gap:16px}.market{border:0}.course-grid{grid-template-columns:1fr}.video-grid{grid-template-columns:1fr}.admin-layout{grid-template-columns:1fr}.admin-stats{grid-template-columns:1fr 1fr}.section,.course-section,.video-section{padding:75px 22px}}
+@media(max-width:560px){.brand b{font-size:18px}.brand img{width:40px;height:40px}.hero h1{font-size:62px}.market-strip{grid-template-columns:1fr 1fr}.head{display:block}.head h2{font-size:49px}.admin-stats{grid-template-columns:1fr}.footer-logo{font-size:38px}}
+</style>
+</head>
+<body>
+<div class="top"><div class="ticker">
+<span>DAX <b class="up">+0,64%</b></span><span>S&amp;P 500 <b class="up">+0,28%</b></span><span>NASDAQ <b class="up">+0,72%</b></span><span>BTC/USD <b class="up">+1,35%</b></span><span>GOLD <b class="down">−0,21%</b></span><span>EUR/USD <b class="up">+0,11%</b></span>
+<span>DAX <b class="up">+0,64%</b></span><span>S&amp;P 500 <b class="up">+0,28%</b></span><span>NASDAQ <b class="up">+0,72%</b></span><span>BTC/USD <b class="up">+1,35%</b></span><span>GOLD <b class="down">−0,21%</b></span><span>EUR/USD <b class="up">+0,11%</b></span>
+</div></div>
+
+<header class="header">
+<nav class="nav"><a href="#home">Startseite</a><a href="#markets">Markets</a><a href="#terminal">Terminal</a><a href="#strategies">Strategien</a><a href="#courses">Kurse</a><a href="#academy">Academy</a><a href="#impressum">Impressum</a></nav>
+<a class="brand" href="#home"><img src="assets/axenvo-logo.png" alt="AXENVO Logo"><b>AXENVO</b></a>
+<div class="actions"><button class="live">MARKET LIVE</button><button onclick="openSearch()">⌕</button><button onclick="go('terminal')">◈</button></div>
+</header>
+
+<div class="categories">
+<div class="cat" onclick="go('markets')"><div class="circle c1">↗</div><span>Markets</span></div>
+<div class="cat" onclick="go('terminal')"><div class="circle c2">◒</div><span>Terminal</span></div>
+<div class="cat" onclick="go('strategies')"><div class="circle c3">▥</div><span>Strategien</span></div>
+<div class="cat" onclick="go('academy')"><div class="circle c4">▶</div><span>Videos</span></div>
+<div class="cat" onclick="go('courses')"><div class="circle c5">AX</div><span>Kurse</span></div>
+</div>
+
+<section class="hero" id="home">
+<video class="hero-video" autoplay muted loop playsinline preload="auto">
+<source src="assets/axenvo-market-loop.mp4" type="video/mp4">
+</video>
+<div class="hero-video-overlay"></div>
+<div class="video-badge">● VIDEO LIVE · AUTOPLAY</div>
+<div class="hero-copy">
+<div class="eyebrow">AXENVO TRADING · PRO MARKET EXPERIENCE</div>
+<h1>READ THE<br><em>MARKET.</em></h1>
+<p>Trading-Terminal, Market Intelligence, Strategien und Education in einer Premium-Oberfläche — jetzt mit einem durchgehend laufenden Market-Video im Hero.</p>
+<button class="btn" onclick="go('terminal')">OPEN TRADING TERMINAL →</button>
+</div>
+</section>
+
+<div class="market-strip">
+<div class="market"><small>DAX</small><strong>18.432,12</strong><span class="up">+0,64%</span></div>
+<div class="market"><small>S&amp;P 500</small><strong>5.321,41</strong><span class="up">+0,28%</span></div>
+<div class="market"><small>NASDAQ</small><strong>18.234,11</strong><span class="up">+0,72%</span></div>
+<div class="market"><small>BTC / USD</small><strong>67.542,31</strong><span class="up">+1,35%</span></div>
+<div class="market"><small>GOLD</small><strong>2.342,18</strong><span class="down">−0,21%</span></div>
+<div class="market"><small>EUR / USD</small><strong>1,0824</strong><span class="up">+0,11%</span></div>
+</div>
+
+<section class="section" id="markets">
+<div class="head"><div><div class="label">MARKET INTELLIGENCE · MARKTDATEN</div><h2>THE MARKET<br>IN ONE VIEW.</h2></div><p class="muted">Price Action, Momentum, Levels, Volatilität und Risiko — visuell konzentriert in einer klaren Trading-Oberfläche.</p></div>
+<div class="dashboard">
+<div class="card" id="terminal"><div class="card-title"><div><h3>DAX · PRICE ACTION</h3><small>1 DAY · MARKET DATA</small></div><strong class="up">+0,64%</strong></div><div class="big">18.432,12 <span class="up">▲ 117,52</span></div><div class="big-chart"><div class="gridlines"></div><svg viewBox="0 0 900 340" preserveAspectRatio="none"><path d="M0 290 C80 305 120 250 180 265 S270 205 335 220 S405 165 475 190 S540 130 610 150 S690 115 755 80 S825 105 900 45" fill="none" stroke="#789a5f" stroke-width="4"/><path d="M0 290 C80 305 120 250 180 265 S270 205 335 220 S405 165 475 190 S540 130 610 150 S690 115 755 80 S825 105 900 45 L900 340 L0 340Z" fill="#9fbd7c" opacity=".12"/></svg><div class="marker"><span>18.432</span></div></div></div>
+<div class="card"><div class="card-title"><h3>MARKET SNAPSHOT</h3><small>AXENVO SIGNALS</small></div><div class="stats"><div class="stat"><small>TREND</small><strong class="positive">BULLISH</strong></div><div class="stat"><small>MOMENTUM</small><strong>78 / 100</strong></div><div class="stat"><small>SUPPORT</small><strong>18.120</strong></div><div class="stat"><small>RESISTANCE</small><strong>18.760</strong></div></div><div style="margin-top:24px;font-size:9px;color:#888;letter-spacing:1px">RISK UTILIZATION</div><div class="riskbar"><i></i></div><p class="muted" style="font-size:10px;margin-top:18px">Illustrative Marktdaten. Keine Anlageberatung.</p></div>
+</div>
+<div class="tools">
+<div class="tool"><div class="icon">⌁</div><h4>CHART SCANNER</h4><p>Setups und Marktbewegungen strukturiert visualisieren.</p></div>
+<div class="tool"><div class="icon">◫</div><h4>WATCHLIST</h4><p>Lieblingsmärkte und wichtige Levels im Blick behalten.</p></div>
+<div class="tool"><div class="icon">◎</div><h4>RISK ENGINE</h4><p>Positionsgröße und Risiko vor dem Trade planen.</p></div>
+<div class="tool"><div class="icon">◌</div><h4>TRADE JOURNAL</h4><p>Setups, Entscheidungen und Ergebnisse dokumentieren.</p></div>
+</div>
+</section>
+
+<section class="section" id="strategies">
+<div class="head"><div><div class="label">AXENVO PLAYBOOK</div><h2>TRADE WITH<br>A PLAN.</h2></div><p class="muted">Nicht Hype, sondern Struktur: Trend, Price Action und Risiko sauber auseinanderhalten.</p></div>
+<div class="strategy">
+<article class="strategy-card"><strong>01 · TREND</strong><h3>Momentum</h3><p>Trends erkennen, Swing-Levels markieren und Setups erst nach Bestätigung bewerten.</p></article>
+<article class="strategy-card"><strong>02 · PRICE ACTION</strong><h3>Breakout</h3><p>Wichtige Zonen definieren, Ausbruch beobachten und vorher die Ungültigkeit festlegen.</p></article>
+<article class="strategy-card"><strong>03 · RISK</strong><h3>Position</h3><p>Risiko pro Trade, Stop-Loss und Chance-Risiko-Verhältnis gehören vor jeden Einstieg.</p></article>
+</div>
+</section>
+
+<section class="course-section" id="courses">
+<div class="head"><div><div class="label">AXENVO EDUCATION STORE</div><h2>LEARN THE<br>MARKET.</h2></div><p class="muted">Trading-Kurse direkt über AXENVO. Besucher sehen Preis und Inhalt; der Kaufvorgang kann später an einen echten Checkout angeschlossen werden.</p></div>
+<div class="course-grid">
+<article class="course-card"><div class="course-art"><strong>AXENVO COURSE 01</strong><b>Trading Fundamentals</b></div><div class="course-info"><h3>Trading Fundamentals</h3><p>Marktstruktur, Candlesticks, Trend, Support &amp; Resistance und Grundlagen.</p><div class="course-meta"><span>8 MODULE · 4,5 H</span><span class="course-price">49 €</span></div><button class="buy" onclick="buyCourse('Trading Fundamentals',49)">KURS ANSEHEN / KAUFEN →</button></div></article>
+<article class="course-card"><div class="course-art gold"><strong>AXENVO COURSE 02</strong><b>Price Action Pro</b></div><div class="course-info"><h3>Price Action Pro</h3><p>Setups lesen, Breakouts bewerten und ein Trading-Playbook aufbauen.</p><div class="course-meta"><span>12 MODULE · 7 H</span><span class="course-price">99 €</span></div><button class="buy" onclick="buyCourse('Price Action Pro',99)">KURS ANSEHEN / KAUFEN →</button></div></article>
+<article class="course-card"><div class="course-art dark"><strong>AXENVO COURSE 03</strong><b>Risk &amp; Discipline</b></div><div class="course-info"><h3>Risk &amp; Discipline</h3><p>Positionsgröße, Risiko, Journal und Trading-Prozesse.</p><div class="course-meta"><span>6 MODULE · 3 H</span><span class="course-price">79 €</span></div><button class="buy" onclick="buyCourse('Risk & Discipline',79)">KURS ANSEHEN / KAUFEN →</button></div></article>
+</div>
+<div class="admin-entry"><span>AXENVO CREATOR AREA · Kurse verwalten, neue Kurse anlegen und Vorschau-Verkäufe ansehen.</span><button class="admin-btn" onclick="openAdmin()">ADMIN MODUS →</button></div>
+</section>
+
+<section class="video-section" id="academy">
+<div class="head"><div><div class="label">AXENVO TRADING ACADEMY</div><h2>WATCH.<br>LEARN.<br>EXECUTE.</h2></div><p class="muted">Video-Learnings für Marktstruktur, Price Action und Risk Management.</p></div>
+<div class="video-grid">
+<div class="video"><div class="video-ui">AXENVO / LESSON 01<br><br>MARKET STRUCTURE · PRICE ACTION · RISK</div><div class="play">▶</div></div>
+<div class="video-caption"><div class="label">VIDEO 01</div><h3>Market Structure</h3><p>Verstehe Trends, Swing Highs, Swing Lows, Breakouts und wichtige Marktphasen anhand von Charts.</p><button class="btn dark" onclick="alert('Hier kannst du später einen echten YouTube-Link oder eine MP4-Datei einsetzen.')">VIDEO STARTEN →</button></div>
+</div>
+</section>
+
+
+<section class="section" id="impressum">
+<div class="head"><div><div class="label">AXENVO · RECHTLICHE INFORMATIONEN</div><h2>IMPRESSUM</h2></div>
+<p class="muted">Angaben gemäß § 5 Digitale-Dienste-Gesetz. Die vollständige Anschrift wird ergänzt.</p></div>
+<div class="dashboard">
+<div class="card">
+<h3>ANBIETER</h3>
+<div style="margin-top:20px;line-height:1.9;font-size:13px">
+<strong>AXENVO</strong><br>
+Marko Romado<br>
+Heilbad Heiligenstadt
+</div>
+</div>
+<div class="card">
+<h3>KONTAKT</h3>
+<div style="margin-top:20px;line-height:1.9;font-size:13px">
+E-Mail: <a href="mailto:frydasv@gmail.com" style="color:#8c7654">frydasv@gmail.com</a><br>
+Telefon: <a href="tel:+4915129674258" style="color:#8c7654">+49 1512 9674258</a><br>
+Anschrift: <span style="color:#8c7654">Wird ergänzt</span>
+</div>
+</div>
+</div>
+<div style="margin-top:18px;padding:20px;border:1px solid #e3e0d7;background:#fff;color:#777;font-size:10px;line-height:1.8">
+<strong style="color:#171714">Wichtiger Hinweis:</strong> Für ein geschäftlich betriebenes Online-Angebot müssen insbesondere Name und vollständige ladungsfähige Anschrift sowie Angaben zur schnellen elektronischen Kontaktaufnahme angegeben werden. Weitere Angaben können je nach Unternehmensform und Tätigkeit erforderlich sein.
+</div>
+</section>
+
+<section class="risk"><h2>DISCIPLINE OVER HYPE.</h2><p>Trading und Investieren sind mit erheblichen Risiken verbunden. Diese Website ist ein Lern- und Informationsprojekt. Die dargestellten Kurse, Signale, Renditen und Marktwerte sind keine Finanzberatung.</p><small>MARKET DATA · EDUCATIONAL EXPERIENCE · NOT FINANCIAL ADVICE</small></section>
+
+<footer>
+<div class="footer-logo"><img src="assets/axenvo-logo.png" alt="AXENVO Logo">AXENVO</div>
+<div class="discord-wrap">
+<a class="discord-link" href="https://discord.gg/AcEPnz6eP" target="_blank" rel="noopener noreferrer"><span class="discord-dot"></span>AXENVO DISCORD ÖFFNEN →</a>
+<button class="discord-copy" type="button" onclick="copyDiscord()">LINK KOPIEREN</button>
+<span class="copy-toast" id="copyToast">Discord-Link kopiert</span>
+</div>
+<div class="footer-links"><a href="#markets">Markets</a><a href="#terminal">Terminal</a><a href="#strategies">Strategien</a><a href="#courses">Kurse</a><a href="#academy">Academy</a><a href="#impressum">Impressum</a></div>
+</footer>
+
+<div class="admin-panel" id="adminPanel">
+<div class="admin-box">
+<div class="admin-top"><div><div class="label">AXENVO CREATOR AREA</div><h2>ADMIN MODE</h2></div><button class="close-admin" onclick="closeAdmin()">×</button></div>
+<div class="admin-login" id="adminLogin"><label>ADMIN PASSWORD</label><input id="adminPassword" type="password" placeholder="Passwort eingeben …"><div class="admin-error" id="adminError"></div><button onclick="loginAdmin()">ADMIN LOGIN →</button><p style="font-size:9px;color:#888;line-height:1.6;margin-top:16px">Vorschau-Schutz für diese statische Website.</p></div>
+<div class="admin-dashboard" id="adminDashboard"><div class="admin-stats"><div class="admin-stat"><small>KURSE</small><strong id="adminCourseCount">3</strong></div><div class="admin-stat"><small>VERKÄUFE</small><strong id="adminSales">0</strong></div><div class="admin-stat"><small>UMSATZ</small><strong id="adminRevenue">0 €</strong></div></div><div class="admin-layout"><div class="admin-card"><h3>KURSE VERWALTEN</h3><div id="courseRows"></div></div><div class="admin-card"><h3>NEUEN KURS ANLEGEN</h3><input id="newCourseName" placeholder="Kursname"><input id="newCoursePrice" type="number" placeholder="Preis in €"><textarea id="newCourseDesc" rows="4" placeholder="Kurzbeschreibung"></textarea><button onclick="addCourse()">KURS HINZUFÜGEN →</button></div></div></div>
+</div></div>
+
+<div class="search" id="search"><input id="searchInput" placeholder="Market, Strategie oder Thema suchen …"><button onclick="closeSearch()">×</button></div>
+
+<script>
+const ADMIN_PASSWORD="AXENVO2026";
+let courses=JSON.parse(localStorage.getItem("axenvo_courses")||"null")||[{name:"Trading Fundamentals",price:49},{name:"Price Action Pro",price:99},{name:"Risk & Discipline",price:79}];
+let sales=JSON.parse(localStorage.getItem("axenvo_sales")||"[]");
+function go(id){document.getElementById(id).scrollIntoView({behavior:"smooth"})}
+function openSearch(){document.getElementById("search").classList.add("open");document.getElementById("searchInput").focus()}
+function closeSearch(){document.getElementById("search").classList.remove("open")}
+function openAdmin(){document.getElementById("adminPanel").classList.add("open");document.getElementById("adminPassword").focus()}
+function closeAdmin(){document.getElementById("adminPanel").classList.remove("open")}
+function loginAdmin(){if(document.getElementById("adminPassword").value===ADMIN_PASSWORD){document.getElementById("adminLogin").style.display="none";document.getElementById("adminDashboard").classList.add("show");renderAdmin()}else{document.getElementById("adminError").textContent="Passwort nicht korrekt."}}
+function buyCourse(name,price){if(confirm(name+" für "+price+" € öffnen?\\n\\nShop: Es wird keine echte Zahlung durchgeführt.")){sales.push({name,price,date:new Date().toLocaleString("de-DE")});localStorage.setItem("axenvo_sales",JSON.stringify(sales));alert("Kaufvorgang gespeichert.")}
+}
+function renderAdmin(){document.getElementById("adminCourseCount").textContent=courses.length;document.getElementById("adminSales").textContent=sales.length;document.getElementById("adminRevenue").textContent=sales.reduce((a,b)=>a+b.price,0).toFixed(2).replace(".",",")+" €";document.getElementById("courseRows").innerHTML=courses.map((c,i)=>`<div class="course-row"><span>${c.name}<br><small>${c.price} €</small></span><button class="tiny-btn danger" onclick="removeCourse(${i})">LÖSCHEN</button></div>`).join("")}
+function addCourse(){const name=document.getElementById("newCourseName").value.trim(),price=Number(document.getElementById("newCoursePrice").value);if(!name||!price){alert("Bitte Kursname und Preis eintragen.");return}courses.push({name,price});localStorage.setItem("axenvo_courses",JSON.stringify(courses));renderAdmin();document.getElementById("newCourseName").value="";document.getElementById("newCoursePrice").value=""}
+function removeCourse(i){if(confirm("Diesen Kurs entfernen?")){courses.splice(i,1);localStorage.setItem("axenvo_courses",JSON.stringify(courses));renderAdmin()}}
+document.getElementById("searchInput").addEventListener("keydown",e=>{if(e.key==="Enter"){go("markets");closeSearch()}})
+document.addEventListener("keydown",e=>{if(e.key==="Escape"){closeAdmin();closeSearch()}})
+
+function copyDiscord(){
+  const url="https://discord.gg/AcEPnz6eP";
+  navigator.clipboard.writeText(url).then(()=>{
+    const el=document.getElementById("copyToast");
+    el.classList.add("show");
+    setTimeout(()=>el.classList.remove("show"),1800);
+  }).catch(()=>{
+    prompt("Discord-Link kopieren:",url);
+  });
+}
+
+</script>
+</body>
+</html>
