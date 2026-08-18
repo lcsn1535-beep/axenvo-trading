@@ -37,6 +37,8 @@ footer{background:#070807;color:#fff;padding:70px 7% 28px}.footer-logo{display:f
 .tv-card{background:#fff;border:1px solid #e3e0d7;padding:0;overflow:hidden}.tv-title{padding:18px 22px;border-bottom:1px solid #ece9e1;display:flex;justify-content:space-between;align-items:center}.tv-title h3{font-size:13px;margin:0;font-weight:500}.tv-live{font-size:9px;letter-spacing:1px;color:#73985a}.tv-live:before{content:"";display:inline-block;width:6px;height:6px;border-radius:50%;background:#8baa68;margin-right:6px;animation:blink 1.4s infinite}.tv-chart{height:540px}.tv-overview{height:430px}.tv-small{height:360px}
 #tradingview-widget-container,#market-overview-widget{height:100%;width:100%}
 .live-layout{display:grid;grid-template-columns:1.65fr .85fr;gap:18px}.live-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:18px}
+
+.tv-frame{width:100%;height:100%;border:0;display:block;background:#fff}.tv-frame-wrap{height:100%;overflow:hidden;background:#fff}.live-toolbar{display:flex;gap:8px;flex-wrap:wrap;padding:12px 18px;border-bottom:1px solid #ece9e1;background:#fff}.symbol-btn{border:1px solid #ddd8cd;background:#fff;padding:8px 10px;font-size:9px;letter-spacing:.7px;cursor:pointer}.symbol-btn:hover,.symbol-btn.active{background:#111;color:#fff;border-color:#111}.widget-loading{display:grid;place-items:center;height:100%;color:#999;font-size:11px;letter-spacing:1px}
 </style>
 </head>
 <body>
@@ -77,79 +79,47 @@ footer{background:#070807;color:#fff;padding:70px 7% 28px}.footer-logo{display:f
 <section class="section" id="markets">
 <div class="head"><div><div class="label">LIVE MARKET INTELLIGENCE · TRADINGVIEW DATA</div><h2>THE MARKET<br>IN ONE VIEW.</h2></div><p class="muted">Echte Markt-Widgets, interaktive Charts, Watchlist und Wirtschaftskalender in einer professionellen Trading-Oberfläche.</p></div>
 
+
 <div class="live-layout">
   <div class="tv-card" id="terminal">
     <div class="tv-title"><h3>LIVE CHART · DAX 40</h3><span class="tv-live">LIVE MARKET DATA</span></div>
-    <div class="tv-chart" id="tradingview-widget-container">
-      <div class="tradingview-widget-container__widget" style="height:100%;width:100%"></div>
-      <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js" async>
-      {
-        "autosize": true,
-        "symbol": "XETR:DAX",
-        "interval": "15",
-        "timezone": "Europe/Berlin",
-        "theme": "light",
-        "style": "1",
-        "withdateranges": true,
-        "hide_side_toolbar": false,
-        "allow_symbol_change": true,
-        "save_image": true,
-        "hide_top_toolbar": false,
-        "hide_legend": false,
-        "hide_volume": false,
-        "support_host": "https://www.tradingview.com",
-        "watchlist": ["XETR:DAX","SP:SPX","NASDAQ:NDX","COINBASE:BTCUSD","OANDA:XAUUSD","FX:EURUSD"]
-      }
-      </script>
+    <div class="live-toolbar">
+      <button class="symbol-btn active" onclick="changeTV('XETR:DAX',this)">DAX</button>
+      <button class="symbol-btn" onclick="changeTV('SP:SPX',this)">S&amp;P 500</button>
+      <button class="symbol-btn" onclick="changeTV('NASDAQ:NDX',this)">NASDAQ 100</button>
+      <button class="symbol-btn" onclick="changeTV('COINBASE:BTCUSD',this)">BTC</button>
+      <button class="symbol-btn" onclick="changeTV('COINBASE:ETHUSD',this)">ETH</button>
+      <button class="symbol-btn" onclick="changeTV('FX:EURUSD',this)">EUR/USD</button>
+      <button class="symbol-btn" onclick="changeTV('OANDA:XAUUSD',this)">GOLD</button>
+    </div>
+    <div class="tv-chart">
+      <iframe id="tv-main" class="tv-frame" loading="eager" allowfullscreen title="TradingView Live Chart" src="https://s.tradingview.com/widgetembed/?symbol=XETR%3ADAX&interval=15&theme=light&style=1&locale=de_DE&timezone=Europe%2FBerlin&withdateranges=true&hide_side_toolbar=false&allow_symbol_change=true&save_image=false"></iframe>
     </div>
   </div>
+
   <div class="tv-card">
     <div class="tv-title"><h3>MARKET OVERVIEW</h3><span class="tv-live">LIVE</span></div>
-    <div class="tv-overview" id="market-overview-widget">
-      <div class="tradingview-widget-container__widget" style="height:100%;width:100%"></div>
-      <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-market-overview.js" async>
-      {
-        "colorTheme": "light",
-        "dateRange": "1D",
-        "showChart": true,
-        "locale": "en",
-        "largeChartUrl": "",
-        "isTransparent": false,
-        "showSymbolLogo": true,
-        "tabs": [
-          {
-            "title": "Indices",
-            "symbols": [
-              {"s":"XETR:DAX","d":"DAX 40"},
-              {"s":"SP:SPX","d":"S&P 500"},
-              {"s":"NASDAQ:NDX","d":"Nasdaq 100"}
-            ]
-          },
-          {
-            "title": "Crypto",
-            "symbols": [
-              {"s":"COINBASE:BTCUSD","d":"Bitcoin"},
-              {"s":"COINBASE:ETHUSD","d":"Ethereum"}
-            ]
-          },
-          {
-            "title": "FX & Metals",
-            "symbols": [
-              {"s":"FX:EURUSD","d":"EUR/USD"},
-              {"s":"OANDA:XAUUSD","d":"Gold"}
-            ]
-          }
-        ],
-        "width": "100%",
-        "height": "100%"
-      }
-      </script>
+    <div class="tv-overview">
+      <iframe class="tv-frame" loading="eager" title="TradingView Market Overview" src="https://s.tradingview.com/widgetembed/?symbol=SP%3ASPX&interval=15&theme=light&style=1&locale=de_DE&timezone=Europe%2FBerlin&withdateranges=true&hide_side_toolbar=false&allow_symbol_change=true&save_image=false"></iframe>
     </div>
   </div>
 </div>
+
 <div class="live-grid">
   <div class="tv-card">
     <div class="tv-title"><h3>WATCHLIST · CORE MARKETS</h3><span class="tv-live">LIVE</span></div>
+    <div class="tv-small">
+      <iframe class="tv-frame" loading="eager" title="TradingView Bitcoin Chart" src="https://s.tradingview.com/widgetembed/?symbol=COINBASE%3ABTCUSD&interval=15&theme=light&style=1&locale=de_DE&timezone=Europe%2FBerlin&withdateranges=true&hide_side_toolbar=false&allow_symbol_change=true&save_image=false"></iframe>
+    </div>
+  </div>
+  <div class="tv-card">
+    <div class="tv-title"><h3>GOLD · EUR/USD</h3><span class="tv-live">LIVE</span></div>
+    <div class="tv-small">
+      <iframe class="tv-frame" loading="eager" title="TradingView Gold Chart" src="https://s.tradingview.com/widgetembed/?symbol=OANDA%3AXAUUSD&interval=15&theme=light&style=1&locale=de_DE&timezone=Europe%2FBerlin&withdateranges=true&hide_side_toolbar=false&allow_symbol_change=true&save_image=false"></iframe>
+    </div>
+  </div>
+</div>
+
     <div class="tv-small">
       <div class="tradingview-widget-container__widget" style="height:100%;width:100%"></div>
       <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-market-quotes.js" async>
@@ -286,6 +256,26 @@ function copyDiscord(){
   }).catch(()=>{
     prompt("Discord-Link kopieren:",url);
   });
+}
+
+
+function changeTV(symbol, btn){
+  const base="https://s.tradingview.com/widgetembed/?";
+  const params=new URLSearchParams({
+    symbol:symbol,
+    interval:"15",
+    theme:"light",
+    style:"1",
+    locale:"de_DE",
+    timezone:"Europe/Berlin",
+    withdateranges:"true",
+    hide_side_toolbar:"false",
+    allow_symbol_change:"true",
+    save_image:"false"
+  });
+  document.getElementById("tv-main").src=base+params.toString();
+  document.querySelectorAll(".symbol-btn").forEach(b=>b.classList.remove("active"));
+  btn.classList.add("active");
 }
 
 </script>

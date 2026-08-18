@@ -1,26 +1,12 @@
-AXENVO TRADING PRO MAX — GITHUB READY
+AXENVO TRADING PRO MAX — LIVE / IFRAME VERSION
 
-Direkt in das Hauptverzeichnis des GitHub-Repositories hochladen:
+Diese Version verwendet direkte TradingView-iframe-Embeds für die Live-Charts.
+Das macht die Live-Bereiche robuster auf statischem Hosting wie GitHub Pages.
 
+Root-Struktur:
 index.html
-README.txt
 assets/
   axenvo-logo.png
   axenvo-market-loop.mp4
 
-Danach GitHub Pages:
-Settings → Pages → Deploy from a branch → main → / (root) → Save
-
-Die Website enthält:
-- AXENVO Logo
-- TradingView Live-Market-Widgets
-- Trading-Terminal
-- Watchlist
-- Market Overview
-- Economic Calendar
-- Trading-Kurse
-- Admin-Bereich
-- Discord-Link
-- dauerhaft laufendes Hero-Video
-
-Das Impressum ist in dieser Version entfernt.
+TradingView bietet den Advanced Real-Time Chart auch als iframe-Format an.
