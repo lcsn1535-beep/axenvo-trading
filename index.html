@@ -33,6 +33,10 @@ footer{background:#070807;color:#fff;padding:70px 7% 28px}.footer-logo{display:f
 .search{position:fixed;inset:0;background:rgba(255,255,255,.97);z-index:100;display:none;align-items:center;justify-content:center}.search.open{display:flex}.search input{width:70%;font-size:39px;border:0;border-bottom:1px solid #111;background:none;outline:0;padding:15px}.search button{border:0;background:none;font-size:30px;cursor:pointer}
 @media(max-width:950px){.header{grid-template-columns:1fr auto;padding:0 18px}.nav{display:none}.categories{justify-content:flex-start;overflow:auto;padding:0 18px}.hero{height:650px}.market-strip{grid-template-columns:repeat(3,1fr);gap:16px}.market{border:0}.course-grid{grid-template-columns:1fr}.video-grid{grid-template-columns:1fr}.admin-layout{grid-template-columns:1fr}.admin-stats{grid-template-columns:1fr 1fr}.section,.course-section,.video-section{padding:75px 22px}}
 @media(max-width:560px){.brand b{font-size:18px}.brand img{width:40px;height:40px}.hero h1{font-size:62px}.market-strip{grid-template-columns:1fr 1fr}.head{display:block}.head h2{font-size:49px}.admin-stats{grid-template-columns:1fr}.footer-logo{font-size:38px}}
+
+.tv-card{background:#fff;border:1px solid #e3e0d7;padding:0;overflow:hidden}.tv-title{padding:18px 22px;border-bottom:1px solid #ece9e1;display:flex;justify-content:space-between;align-items:center}.tv-title h3{font-size:13px;margin:0;font-weight:500}.tv-live{font-size:9px;letter-spacing:1px;color:#73985a}.tv-live:before{content:"";display:inline-block;width:6px;height:6px;border-radius:50%;background:#8baa68;margin-right:6px;animation:blink 1.4s infinite}.tv-chart{height:540px}.tv-overview{height:430px}.tv-small{height:360px}
+#tradingview-widget-container,#market-overview-widget{height:100%;width:100%}
+.live-layout{display:grid;grid-template-columns:1.65fr .85fr;gap:18px}.live-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:18px}
 </style>
 </head>
 <body>
@@ -69,20 +73,128 @@ footer{background:#070807;color:#fff;padding:70px 7% 28px}.footer-logo{display:f
 </div>
 </section>
 
-<div class="market-strip">
-<div class="market"><small>DAX</small><strong>18.432,12</strong><span class="up">+0,64%</span></div>
-<div class="market"><small>S&amp;P 500</small><strong>5.321,41</strong><span class="up">+0,28%</span></div>
-<div class="market"><small>NASDAQ</small><strong>18.234,11</strong><span class="up">+0,72%</span></div>
-<div class="market"><small>BTC / USD</small><strong>67.542,31</strong><span class="up">+1,35%</span></div>
-<div class="market"><small>GOLD</small><strong>2.342,18</strong><span class="down">−0,21%</span></div>
-<div class="market"><small>EUR / USD</small><strong>1,0824</strong><span class="up">+0,11%</span></div>
-</div>
-
+<div class="market-strip"><div class="market"><small>LIVE DATA</small><strong>MARKETS ONLINE</strong><span class="up">●</span></div><div class="market"><small>CHARTS</small><strong>TRADINGVIEW</strong><span class="up">●</span></div><div class="market"><small>INDICES</small><strong>DAX · S&amp;P · NASDAQ</strong></div><div class="market"><small>CRYPTO</small><strong>BTC · ETH</strong></div><div class="market"><small>FX &amp; METALS</small><strong>EUR/USD · GOLD</strong></div><div class="market"><small>MACRO</small><strong>CALENDAR</strong></div></div>
 <section class="section" id="markets">
-<div class="head"><div><div class="label">MARKET INTELLIGENCE · MARKTDATEN</div><h2>THE MARKET<br>IN ONE VIEW.</h2></div><p class="muted">Price Action, Momentum, Levels, Volatilität und Risiko — visuell konzentriert in einer klaren Trading-Oberfläche.</p></div>
-<div class="dashboard">
-<div class="card" id="terminal"><div class="card-title"><div><h3>DAX · PRICE ACTION</h3><small>1 DAY · MARKET DATA</small></div><strong class="up">+0,64%</strong></div><div class="big">18.432,12 <span class="up">▲ 117,52</span></div><div class="big-chart"><div class="gridlines"></div><svg viewBox="0 0 900 340" preserveAspectRatio="none"><path d="M0 290 C80 305 120 250 180 265 S270 205 335 220 S405 165 475 190 S540 130 610 150 S690 115 755 80 S825 105 900 45" fill="none" stroke="#789a5f" stroke-width="4"/><path d="M0 290 C80 305 120 250 180 265 S270 205 335 220 S405 165 475 190 S540 130 610 150 S690 115 755 80 S825 105 900 45 L900 340 L0 340Z" fill="#9fbd7c" opacity=".12"/></svg><div class="marker"><span>18.432</span></div></div></div>
-<div class="card"><div class="card-title"><h3>MARKET SNAPSHOT</h3><small>AXENVO SIGNALS</small></div><div class="stats"><div class="stat"><small>TREND</small><strong class="positive">BULLISH</strong></div><div class="stat"><small>MOMENTUM</small><strong>78 / 100</strong></div><div class="stat"><small>SUPPORT</small><strong>18.120</strong></div><div class="stat"><small>RESISTANCE</small><strong>18.760</strong></div></div><div style="margin-top:24px;font-size:9px;color:#888;letter-spacing:1px">RISK UTILIZATION</div><div class="riskbar"><i></i></div><p class="muted" style="font-size:10px;margin-top:18px">Illustrative Marktdaten. Keine Anlageberatung.</p></div>
+<div class="head"><div><div class="label">LIVE MARKET INTELLIGENCE · TRADINGVIEW DATA</div><h2>THE MARKET<br>IN ONE VIEW.</h2></div><p class="muted">Echte Markt-Widgets, interaktive Charts, Watchlist und Wirtschaftskalender in einer professionellen Trading-Oberfläche.</p></div>
+
+<div class="live-layout">
+  <div class="tv-card" id="terminal">
+    <div class="tv-title"><h3>LIVE CHART · DAX 40</h3><span class="tv-live">LIVE MARKET DATA</span></div>
+    <div class="tv-chart" id="tradingview-widget-container">
+      <div class="tradingview-widget-container__widget" style="height:100%;width:100%"></div>
+      <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js" async>
+      {
+        "autosize": true,
+        "symbol": "XETR:DAX",
+        "interval": "15",
+        "timezone": "Europe/Berlin",
+        "theme": "light",
+        "style": "1",
+        "withdateranges": true,
+        "hide_side_toolbar": false,
+        "allow_symbol_change": true,
+        "save_image": true,
+        "hide_top_toolbar": false,
+        "hide_legend": false,
+        "hide_volume": false,
+        "support_host": "https://www.tradingview.com",
+        "watchlist": ["XETR:DAX","SP:SPX","NASDAQ:NDX","COINBASE:BTCUSD","OANDA:XAUUSD","FX:EURUSD"]
+      }
+      </script>
+    </div>
+  </div>
+  <div class="tv-card">
+    <div class="tv-title"><h3>MARKET OVERVIEW</h3><span class="tv-live">LIVE</span></div>
+    <div class="tv-overview" id="market-overview-widget">
+      <div class="tradingview-widget-container__widget" style="height:100%;width:100%"></div>
+      <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-market-overview.js" async>
+      {
+        "colorTheme": "light",
+        "dateRange": "1D",
+        "showChart": true,
+        "locale": "en",
+        "largeChartUrl": "",
+        "isTransparent": false,
+        "showSymbolLogo": true,
+        "tabs": [
+          {
+            "title": "Indices",
+            "symbols": [
+              {"s":"XETR:DAX","d":"DAX 40"},
+              {"s":"SP:SPX","d":"S&P 500"},
+              {"s":"NASDAQ:NDX","d":"Nasdaq 100"}
+            ]
+          },
+          {
+            "title": "Crypto",
+            "symbols": [
+              {"s":"COINBASE:BTCUSD","d":"Bitcoin"},
+              {"s":"COINBASE:ETHUSD","d":"Ethereum"}
+            ]
+          },
+          {
+            "title": "FX & Metals",
+            "symbols": [
+              {"s":"FX:EURUSD","d":"EUR/USD"},
+              {"s":"OANDA:XAUUSD","d":"Gold"}
+            ]
+          }
+        ],
+        "width": "100%",
+        "height": "100%"
+      }
+      </script>
+    </div>
+  </div>
+</div>
+<div class="live-grid">
+  <div class="tv-card">
+    <div class="tv-title"><h3>WATCHLIST · CORE MARKETS</h3><span class="tv-live">LIVE</span></div>
+    <div class="tv-small">
+      <div class="tradingview-widget-container__widget" style="height:100%;width:100%"></div>
+      <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-market-quotes.js" async>
+      {
+        "colorTheme":"light",
+        "locale":"en",
+        "isTransparent":false,
+        "showSymbolLogo":true,
+        "width":"100%",
+        "height":"100%",
+        "symbolsGroups":[
+          {
+            "name":"Core",
+            "originalName":"Indices & Futures",
+            "symbols":[
+              {"name":"XETR:DAX","displayName":"DAX 40"},
+              {"name":"SP:SPX","displayName":"S&P 500"},
+              {"name":"NASDAQ:NDX","displayName":"Nasdaq 100"},
+              {"name":"COINBASE:BTCUSD","displayName":"BTC/USD"}
+            ]
+          }
+        ]
+      }
+      </script>
+    </div>
+  </div>
+  <div class="tv-card">
+    <div class="tv-title"><h3>ECONOMIC CALENDAR</h3><span>MACRO</span></div>
+    <div class="tv-small">
+      <div class="tradingview-widget-container__widget" style="height:100%;width:100%"></div>
+      <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-events.js" async>
+      {
+        "colorTheme":"light",
+        "isTransparent":false,
+        "locale":"en",
+        "countryFilter":"de,us,gb",
+        "importanceFilter":"-1,0,1",
+        "width":"100%",
+        "height":"100%"
+      }
+      </script>
+    </div>
+  </div>
+</div>
+<div style="margin-top:24px;font-size:9px;color:#888;letter-spacing:1px">RISK UTILIZATION</div><div class="riskbar"><i></i></div><p class="muted" style="font-size:10px;margin-top:18px">Illustrative Marktdaten. Keine Anlageberatung.</p></div>
 </div>
 <div class="tools">
 <div class="tool"><div class="icon">⌁</div><h4>CHART SCANNER</h4><p>Setups und Marktbewegungen strukturiert visualisieren.</p></div>
@@ -120,6 +232,12 @@ footer{background:#070807;color:#fff;padding:70px 7% 28px}.footer-logo{display:f
 </section>
 
 
+
+
+
+<div style="max-width:1050px;margin:28px auto 0;color:#888;font-size:9px;line-height:1.6">
+Marktdaten und Charts werden über eingebettete TradingView-Widgets geladen. Verfügbarkeit und Verzögerung hängen vom jeweiligen Markt und Datenfeed ab.
+</div>
 <section class="risk"><h2>DISCIPLINE OVER HYPE.</h2><p>Trading und Investieren sind mit erheblichen Risiken verbunden. Diese Website ist ein Lern- und Informationsprojekt. Die dargestellten Kurse, Signale, Renditen und Marktwerte sind keine Finanzberatung.</p><small>MARKET DATA · EDUCATIONAL EXPERIENCE · NOT FINANCIAL ADVICE</small></section>
 
 <footer>
